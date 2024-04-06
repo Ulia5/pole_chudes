@@ -17,6 +17,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    private final String[] pointVariants = {"0", "50", "100", "150", "200", "250", "300",
+            "350", "400", "450", "500", "x2"};
     @FXML
     public Label points;
     @FXML
@@ -33,5 +36,18 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String thisQuestion = "Пельмени издавна заготавливают в форме ушек. Что символизируют такие пельмени?";
+        if (question != null) {
+            question.setText(thisQuestion);
+            System.out.println(question.getText().length());
+        }
+    }
+
+    @FXML
+    public void newPoint(ActionEvent event) {
+        if (points != null) {
+            Random rand = new Random();
+            points.setText(pointVariants[rand.nextInt(pointVariants.length)]);
+        }
     }
 }

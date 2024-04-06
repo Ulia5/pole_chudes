@@ -117,7 +117,7 @@
             <Font name="Segoe Print" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="453.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="152.0" text="Крутить барабан!" textFill="#011f45ee">
+      <Button layoutX="453.0" layoutY="408.0" mnemonicParsing="false" onAction="#newPoint" prefHeight="40.0" prefWidth="152.0" text="Крутить барабан!" textFill="#011f45ee">
          <font>
             <Font name="Segoe UI Semibold" size="15.0" />
          </font>
