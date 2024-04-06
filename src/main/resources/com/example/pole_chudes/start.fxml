@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="500.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #03396c;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pole_chudes.Controller">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <HBox alignment="CENTER_LEFT" prefHeight="231.0" prefWidth="760.0">
+      <children>
+         <ImageView fitHeight="334.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@lider.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="218.0" fitWidth="504.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
+            <image>
+               <Image url="@back.png" />
+            </image>
+         </ImageView>
+      </children>
+   </HBox>
+   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="337.0" scaleZ="0.0" text="Капитал шоу" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+      <font>
+         <Font name="Segoe Print Bold" size="39.0" />
+      </font>
+      <textFill>
+         <RadialGradient centerX="0.5" centerY="0.30303031025510846" radius="0.5">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.8333333134651184" green="0.9305555820465088" blue="1.0" opacity="0.23000000417232513" />
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="1.0" green="1.0" blue="1.0" />
+                  </color>
+               </Stop>
+            </stops>
+         </RadialGradient>
+      </textFill>
+   </Label>
+  <Button fx:id="start" alignment="CENTER" onAction="#startGame" prefHeight="61.0" prefWidth="260.0" text="Играть" textAlignment="CENTER" textFill="#011f4b">
+      <font>
+         <Font name="Segoe Print" size="30.0" />
+      </font></Button>
+</VBox>
