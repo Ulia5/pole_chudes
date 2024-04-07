@@ -15,4 +15,8 @@ public class Question {
     public String getAnswer() {
         return answerText;
     }
+
+    public String getGuessedText() {
+        return "*".repeat("энциклопедия".length());
+    }
 }

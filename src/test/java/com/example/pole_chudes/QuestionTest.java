@@ -74,8 +74,9 @@ class QuestionTest {
 
     @Test
     void fillingField() {
-        Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
-                "а некое издание. Какое?", "энциклопедия");
-        assertEquals(question.getGuessedText(), " ".repeat(question.getAnswer().length()));
+        Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
+                "ему присваивают личное имя. Во времена Второй мировой войны " +
+                "американские синоптики начали давать ураганам имена кого?", "теща");
+        assertEquals(question.getGuessedText(), "*".repeat(question.getAnswer().length()));
     }
 }
