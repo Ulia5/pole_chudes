@@ -3,9 +3,11 @@ package com.example.pole_chudes;
 public class Question {
     private String questionText;
     private String answerText;
+    private String guessedText;
     public Question(String question, String answer) {
         this.questionText = question;
         this.answerText = answer;
+        this.guessedText = "*".repeat(answer.length());
     }
 
     public String getQuestion() {
@@ -17,6 +19,6 @@ public class Question {
     }
 
     public String getGuessedText() {
-        return "*".repeat("энциклопедия".length());
+        return guessedText;
     }
 }
