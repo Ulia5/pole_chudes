@@ -71,4 +71,11 @@ class QuestionTest {
         }
         assertTrue(result);
     }
+
+    @Test
+    void fillingField() {
+        Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
+                "а некое издание. Какое?", "энциклопедия");
+        assertEquals(question.getGuessedText(), " ".repeat(question.getAnswer().length()));
+    }
 }
