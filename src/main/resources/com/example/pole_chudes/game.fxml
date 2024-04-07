@@ -122,7 +122,7 @@
             <Font name="Segoe UI Semibold" size="15.0" />
          </font>
       </Button>
-      <GridPane layoutX="125.0" layoutY="199.0" prefHeight="150.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <GridPane fx:id="fieldAnswer" layoutX="125.0" layoutY="199.0" prefHeight="150.0" prefWidth="600.0" style="-fx-background-color: white;">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -298,7 +298,7 @@
                   <Font name="Segoe Print" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black;" textFill="#011f47b4" GridPane.columnIndex="14" GridPane.rowIndex="2">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="40.0" style="-fx-background-color: white; -fx-border-width: 2; -fx-border-color: black;" textFill="#011f47b5" GridPane.columnIndex="14" GridPane.rowIndex="2">
                <font>
                   <Font name="Segoe Print" size="18.0" />
                </font>

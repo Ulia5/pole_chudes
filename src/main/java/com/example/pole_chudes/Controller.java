@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class Controller implements Initializable {
     public Label points;
     @FXML
     public Label question;
+    @FXML
+    public GridPane fieldAnswer;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
@@ -92,6 +96,13 @@ public class Controller implements Initializable {
             Random rand = new Random();
             thisQuestion = allQuestion[rand.nextInt(allQuestion.length)];
             question.setText(thisQuestion.getQuestion());
+            int num = (15 - thisQuestion.getAnswer().length()) / 2;
+            System.out.println(thisQuestion.getAnswer().length());
+            if(fieldAnswer != null && num >= 0) {
+                for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
+                    fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: #011f47");
+                }
+            }
         }
     }
 }
