@@ -113,4 +113,18 @@ class QuestionTest {
         player.addPoints(points);
         assertEquals(points, player.getPoints());
     }
+
+    @Test
+    @DisplayName("Проверка функции дачи ответа и состояния счета после этого")
+    void giveAnswer() {
+        Player player1 = new Player("Михаил");
+        Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
+                "ему присваивают личное имя. Во времена Второй мировой войны " +
+                "американские синоптики начали давать ураганам имена кого?", "теща");
+        int point = 500;
+        player1.giveAnswer(question, "а", point);
+        point += 250;
+        player1.giveAnswer(question, "б", 250);
+        assertEquals(point, player1.getPoints());
+    }
 }
