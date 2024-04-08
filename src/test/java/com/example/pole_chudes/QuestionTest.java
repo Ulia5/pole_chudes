@@ -127,4 +127,14 @@ class QuestionTest {
         player1.giveAnswer(question, "т", 250);
         assertEquals(point, player1.getPoints());
     }
+
+    @Test
+    @DisplayName("Проверка невозможности ввода буквы повторно")
+    void repeatLetter() {
+        Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
+                "ему присваивают личное имя. Во времена Второй мировой войны " +
+                "американские синоптики начали давать ураганам имена кого?", "теща");
+        assertEquals(true, question.checkLetter("а"));
+        assertEquals(false, question.checkLetter("а"));
+    }
 }

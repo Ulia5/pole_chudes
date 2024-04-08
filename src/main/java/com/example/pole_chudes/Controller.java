@@ -132,7 +132,7 @@ public class Controller implements Initializable {
     public void newPoint(ActionEvent event) throws IOException {
         if (points != null) {
             Random rand = new Random();
-            thisPoint = Integer.parseInt(pointVariants[rand.nextInt(pointVariants.length)]);
+            thisPoint = Integer.parseInt(pointVariants[rand.nextInt(pointVariants.length - 1)]);
             points.setText(String.valueOf(thisPoint));
             if (thisPoint != 0) {
                 TextInputDialog textInputDialog = new TextInputDialog();
