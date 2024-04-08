@@ -93,7 +93,7 @@ class QuestionTest {
     void writingRightLetter() {
         Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
                 "а некое издание. Какое?", "энциклопедия");
-        question.chekingLetter("и");
+        question.cheсkingLetter("и");
         String guessed = "***и******и*";
         assertEquals(guessed, question.getGuessedText());
     }

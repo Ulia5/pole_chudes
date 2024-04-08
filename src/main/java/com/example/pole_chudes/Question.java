@@ -21,4 +21,8 @@ public class Question {
     public String getGuessedText() {
         return guessedText;
     }
+
+    public void cheсkingLetter(String letter) {
+        guessedText = "***и******и*";
+    }
 }

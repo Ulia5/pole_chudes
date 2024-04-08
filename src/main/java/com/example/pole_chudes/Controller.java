@@ -100,14 +100,6 @@ public class Controller implements Initializable {
         }
     }
 
-    public void getAnswer(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Question[] allQuestion = new Question[11];
