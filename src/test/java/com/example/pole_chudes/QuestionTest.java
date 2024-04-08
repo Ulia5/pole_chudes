@@ -1,5 +1,6 @@
 package com.example.pole_chudes;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -9,18 +10,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class QuestionTest {
     @Test
+    @DisplayName("Проверка заданных вопроса и ответа")
     void setQuestion() {
         Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
                 "а некое издание. Какое?", "энциклопедия");
         String questionText = "Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
                 "а некое издание. Какое?";
         String answerText = "энциклопедия";
+        // Проверка соответствия возвращенных из геттеров результатов
         assertEquals(questionText, question.getQuestion());
         assertEquals(answerText, question.getAnswer());
     }
 
     @Test
+    @DisplayName("Проверка выполнения случайного вопроса")
     void setRandomQuestions() {
+        // Создание базы вопросов
         Question[] questions = new Question[11];
         questions[0] = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
                 "а некое издание. Какое?", "энциклопедия");
@@ -61,8 +66,10 @@ class QuestionTest {
                 "До нас дошло лишь одно название. Какое?", "сарафан");
         Question thisQuestion;
         Random rand = new Random();
+        // Выбор случайного вопроса и сохранение его в переменной thisQuestion
         thisQuestion = questions[rand.nextInt(questions.length)];
         boolean result = false;
+        // Проверка верности выполнения случайного выбора
         for (Question question : questions) {
             if (Objects.equals(thisQuestion.getQuestion(), question.getQuestion())) {
                 result = true;
@@ -73,10 +80,21 @@ class QuestionTest {
     }
 
     @Test
+    @DisplayName("Проверка заполнения поля для ввода ответа *")
     void fillingField() {
-        Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
-                "ему присваивают личное имя. Во времена Второй мировой войны " +
-                "американские синоптики начали давать ураганам имена кого?", "теща");
+        Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
+                "а некое издание. Какое?", "энциклопедия");
+        // Проверка соответствия кол-ва элеентов в ответе и в поле для ответа
         assertEquals(question.getGuessedText(), "*".repeat(question.getAnswer().length()));
+    }
+
+    @Test
+    @DisplayName("Проверка правильности изменения * на буквы")
+    void writingRightLetter() {
+        Question question = new Question("Однажды в знаменитую французскую тюрьму Бастилию заключили не человека, " +
+                "а некое издание. Какое?", "энциклопедия");
+        question.chekingLetter("и");
+        String guessed = "***и******и*";
+        assertEquals(guessed, question.getGuessedText());
     }
 }

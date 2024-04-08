@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -22,6 +24,9 @@ public class Controller implements Initializable {
 
     private final String[] pointVariants = {"0", "50", "100", "150", "200", "250", "300",
             "350", "400", "450", "500", "x2"};
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
     @FXML
     public Label points;
     @FXML
@@ -31,9 +36,9 @@ public class Controller implements Initializable {
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -80,11 +85,27 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void newPoint(ActionEvent event) {
+    public void newPoint(ActionEvent event) throws IOException {
         if (points != null) {
             Random rand = new Random();
             points.setText(pointVariants[rand.nextInt(pointVariants.length)]);
+            TextInputDialog textInputDialog = new TextInputDialog();
+            textInputDialog.setTitle("Ввод буквы");
+            textInputDialog.setHeaderText("Введите букву:");
+            textInputDialog.setContentText("Ваша буква:");
+            Optional<String> res = textInputDialog.showAndWait();
+            if(res.isPresent()) {
+                System.out.println(res.get());
+            }
         }
+    }
+
+    public void getAnswer(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
@@ -97,7 +118,6 @@ public class Controller implements Initializable {
             thisQuestion = allQuestion[rand.nextInt(allQuestion.length)];
             question.setText(thisQuestion.getQuestion());
             int num = (15 - thisQuestion.getAnswer().length()) / 2;
-            System.out.println(thisQuestion.getAnswer().length());
             if(fieldAnswer != null && num >= 0) {
                 for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
                     fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: #011f47");
