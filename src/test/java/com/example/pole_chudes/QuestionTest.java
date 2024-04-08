@@ -97,4 +97,11 @@ class QuestionTest {
         String guessed = "***и******и*";
         assertEquals(guessed, question.getGuessedText());
     }
+
+    @Test
+    @DisplayName("Создание игрока")
+    void createPlayer() {
+        Player player = new Player("Михаил");
+        assertEquals("Михаил", player.getName());
+    }
 }
