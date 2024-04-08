@@ -24,15 +24,48 @@ public class Controller implements Initializable {
 
     private final String[] pointVariants = {"0", "50", "100", "150", "200", "250", "300",
             "350", "400", "450", "500", "x2"};
+    private int num;
+    private Label letters[];
     private Parent root;
     private Stage stage;
     private Scene scene;
+    private Question thisQuestion;
     @FXML
     public Label points;
     @FXML
     public Label question;
     @FXML
     public GridPane fieldAnswer;
+    @FXML
+    public Label let1;
+    @FXML
+    public Label let2;
+    @FXML
+    public Label let3;
+    @FXML
+    public Label let4;
+    @FXML
+    public Label let5;
+    @FXML
+    public Label let6;
+    @FXML
+    public Label let7;
+    @FXML
+    public Label let8;
+    @FXML
+    public Label let9;
+    @FXML
+    public Label let10;
+    @FXML
+    public Label let11;
+    @FXML
+    public Label let12;
+    @FXML
+    public Label let13;
+    @FXML
+    public Label let14;
+    @FXML
+    public Label let15;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
@@ -95,7 +128,16 @@ public class Controller implements Initializable {
             textInputDialog.setContentText("Ваша буква:");
             Optional<String> res = textInputDialog.showAndWait();
             if(res.isPresent()) {
-                System.out.println(res.get());
+                String ans = res.get();
+                thisQuestion.checkingLetter(ans);
+                int k = 0;
+                for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
+                    if (thisQuestion.getGuessedText().charAt(k) != '*') {
+                        fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: white");
+                        letters[15 - i - 1].setText(String.valueOf(thisQuestion.getAnswer().charAt(k)));
+                    }
+                    k += 1;
+                }
             }
         }
     }
@@ -103,13 +145,14 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Question[] allQuestion = new Question[11];
+        letters = new Label[]{let1, let2, let3, let4, let5, let6, let7, let8, let9, let10, let11, let12, let13,
+                let14, let15};
         addQuestions(allQuestion);
-        Question thisQuestion;
         if (question != null) {
             Random rand = new Random();
             thisQuestion = allQuestion[rand.nextInt(allQuestion.length)];
             question.setText(thisQuestion.getQuestion());
-            int num = (15 - thisQuestion.getAnswer().length()) / 2;
+            num = (15 - thisQuestion.getAnswer().length()) / 2;
             if(fieldAnswer != null && num >= 0) {
                 for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
                     fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: #011f47");

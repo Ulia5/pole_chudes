@@ -22,7 +22,14 @@ public class Question {
         return guessedText;
     }
 
-    public void cheсkingLetter(String letter) {
-        guessedText = "***и******и*";
+    public void checkingLetter(String letter) {
+        for (int i = 0; i < answerText.length(); i += 1) {
+            if (answerText.charAt(i) == letter.charAt(0)) {
+                if (i < answerText.length() + 1)
+                    guessedText = guessedText.substring(0, i) + letter + guessedText.substring(i + 1);
+                else
+                    guessedText = guessedText.substring(0, i) + letter;
+            }
+        }
     }
 }
