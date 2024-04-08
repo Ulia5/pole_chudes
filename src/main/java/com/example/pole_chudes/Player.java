@@ -20,4 +20,13 @@ public class Player {
     public void addPoints(int newPoints) {
         points += newPoints;
     }
+
+    public boolean giveAnswer(Question question, String letter, int newPoint) {
+        if (question.checkingLetter(letter)) {
+            addPoints(newPoint);
+            return true;
+        }
+        else
+            return false;
+    }
 }

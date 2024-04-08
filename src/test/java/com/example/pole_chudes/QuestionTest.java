@@ -124,7 +124,7 @@ class QuestionTest {
         int point = 500;
         player1.giveAnswer(question, "а", point);
         point += 250;
-        player1.giveAnswer(question, "б", 250);
+        player1.giveAnswer(question, "т", 250);
         assertEquals(point, player1.getPoints());
     }
 }

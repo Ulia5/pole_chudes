@@ -92,17 +92,17 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0000" textFill="#011f47b4">
+      <Label fx:id="scale1" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0" textFill="#011f47b4">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0000" textFill="#011f47b4">
+      <Label fx:id="scale2" alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0" textFill="#011f47b4">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0000" textFill="#011f47b5">
+      <Label fx:id="scale3" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="640.0" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: white; -fx-border-radius: 180;" text="0" textFill="#011f47b5">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>

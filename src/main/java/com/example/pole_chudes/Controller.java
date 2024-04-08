@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +27,10 @@ public class Controller implements Initializable {
             "350", "400", "450", "500", "x2"};
     private int num;
     private Label letters[];
+    private Player players[];
+    private Label scales[];
+    private int thisPlayer;
+    private int thisPoint;
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -66,6 +71,12 @@ public class Controller implements Initializable {
     public Label let14;
     @FXML
     public Label let15;
+    @FXML
+    public Label scale1;
+    @FXML
+    public Label scale2;
+    @FXML
+    public Label scale3;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
@@ -121,23 +132,65 @@ public class Controller implements Initializable {
     public void newPoint(ActionEvent event) throws IOException {
         if (points != null) {
             Random rand = new Random();
-            points.setText(pointVariants[rand.nextInt(pointVariants.length)]);
-            TextInputDialog textInputDialog = new TextInputDialog();
-            textInputDialog.setTitle("Ввод буквы");
-            textInputDialog.setHeaderText("Введите букву:");
-            textInputDialog.setContentText("Ваша буква:");
-            Optional<String> res = textInputDialog.showAndWait();
-            if(res.isPresent()) {
+            thisPoint = Integer.parseInt(pointVariants[rand.nextInt(pointVariants.length)]);
+            points.setText(String.valueOf(thisPoint));
+            if (thisPoint != 0) {
+                TextInputDialog textInputDialog = new TextInputDialog();
+                textInputDialog.setTitle("Ввод буквы");
+                textInputDialog.setHeaderText("Введите букву:");
+                textInputDialog.setContentText("Ваша буква:");
+                Optional<String> res = textInputDialog.showAndWait();
                 String ans = res.get();
-                thisQuestion.checkingLetter(ans);
-                int k = 0;
-                for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
-                    if (thisQuestion.getGuessedText().charAt(k) != '*') {
-                        fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: white");
-                        letters[15 - i - 1].setText(String.valueOf(thisQuestion.getAnswer().charAt(k)));
-                    }
-                    k += 1;
+                while (ans.isEmpty()) {
+                    textInputDialog = new TextInputDialog();
+                    textInputDialog.setTitle("Ввод буквы");
+                    textInputDialog.setHeaderText("Вводите хотя бы одну букву:");
+                    textInputDialog.setContentText("Ваша буква:");
+                    res = textInputDialog.showAndWait();
+                    ans = res.get();
                 }
+                while (ans.length() > 1) {
+                    textInputDialog = new TextInputDialog();
+                    textInputDialog.setTitle("Ввод буквы");
+                    textInputDialog.setHeaderText("Вводите только одну букву:");
+                    textInputDialog.setContentText("Ваша буква:");
+                    res = textInputDialog.showAndWait();
+                    ans = res.get();
+                    while (ans.isEmpty()) {
+                        textInputDialog = new TextInputDialog();
+                        textInputDialog.setTitle("Ввод буквы");
+                        textInputDialog.setHeaderText("Вводите хотя бы одну букву:");
+                        textInputDialog.setContentText("Ваша буква:");
+                        res = textInputDialog.showAndWait();
+                        ans = res.get();
+                    }
+                }
+                if (players[thisPlayer].giveAnswer(thisQuestion, ans, thisPoint)) {
+                    int k = 0;
+                    for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
+                        if (thisQuestion.getGuessedText().charAt(k) != '*') {
+                            fieldAnswer.getChildren().get(2 * 15 + i).setStyle("-fx-background-color: white");
+                            letters[15 - i - 1].setText(String.valueOf(thisQuestion.getAnswer().charAt(k)));
+                        }
+                        k += 1;
+                    }
+                    scales[thisPlayer].setText(String.valueOf(players[thisPlayer].getPoints()));
+                } else {
+                    scales[thisPlayer].setTextFill(Color.web("rgb(1, 31, 71)"));
+                    if (thisPlayer == 2)
+                        thisPlayer = 0;
+                    else
+                        thisPlayer += 1;
+                    scales[thisPlayer].setTextFill(Color.web("rgb(255, 0, 0)"));
+                }
+            }
+            else {
+                scales[thisPlayer].setTextFill(Color.web("rgb(1, 31, 71)"));
+                if (thisPlayer == 2)
+                    thisPlayer = 0;
+                else
+                    thisPlayer += 1;
+                scales[thisPlayer].setTextFill(Color.web("rgb(255, 0, 0)"));
             }
         }
     }
@@ -145,11 +198,18 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Question[] allQuestion = new Question[11];
+        Player player1 = new Player("Михаил");
+        Player player2 = new Player("Лариса");
+        Player player3 = new Player("Я");
+        players = new Player[] {player1, player2, player3};
+        scales = new Label[] {scale1, scale2, scale3};
+        thisPlayer = 0;
         letters = new Label[]{let1, let2, let3, let4, let5, let6, let7, let8, let9, let10, let11, let12, let13,
                 let14, let15};
         addQuestions(allQuestion);
         if (question != null) {
             Random rand = new Random();
+            scales[thisPlayer].setTextFill(Color.web("rgb(255, 0, 0)"));
             thisQuestion = allQuestion[rand.nextInt(allQuestion.length)];
             question.setText(thisQuestion.getQuestion());
             num = (15 - thisQuestion.getAnswer().length()) / 2;
