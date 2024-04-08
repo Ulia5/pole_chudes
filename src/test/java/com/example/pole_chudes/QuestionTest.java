@@ -104,4 +104,13 @@ class QuestionTest {
         Player player = new Player("Михаил");
         assertEquals("Михаил", player.getName());
     }
+
+    @Test
+    @DisplayName("Добавление очков игроку")
+    void addPoints() {
+        Player player = new Player("Михаил");
+        int points = 500;
+        player.addPoints(points);
+        assertEquals(points, player.getPoints());
+    }
 }
