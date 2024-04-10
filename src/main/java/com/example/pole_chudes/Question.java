@@ -51,4 +51,20 @@ public class Question {
         else
             return false;
     }
+
+    public Player determiningWinner(Player[] players) {
+        if(!getGuessedText().contains("*")) {
+            int max = 0;
+            int winPlayer = -1;
+            for (int i = 0; i < players.length; i += 1) {
+                if(max < players[i].getPoints()) {
+                    max = players[i].getPoints();
+                    winPlayer = i;
+                }
+            }
+            return players[winPlayer];
+        }
+        else
+            return null;
+    }
 }

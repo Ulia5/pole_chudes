@@ -1,5 +1,6 @@
 package com.example.pole_chudes;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +37,7 @@ public class Controller implements Initializable {
     private Stage stage;
     private Scene scene;
     private Question thisQuestion;
+    private Player winner;
     @FXML
     public Label points;
     @FXML
@@ -143,14 +145,14 @@ public class Controller implements Initializable {
             points.setText(String.valueOf(thisPoint));
             if (thisPoint != 0) {
                 TextInputDialog textInputDialog = new TextInputDialog();
-                textInputDialog.setTitle("Ввод буквы");
+                textInputDialog.setTitle("Поле чудес");
                 textInputDialog.setHeaderText("Введите букву:");
                 textInputDialog.setContentText("Ваша буква:");
                 Optional<String> res = textInputDialog.showAndWait();
                 String ans = res.get();
                 while (ans.isEmpty()) {
                     textInputDialog = new TextInputDialog();
-                    textInputDialog.setTitle("Ввод буквы");
+                    textInputDialog.setTitle("Поле чудес");
                     textInputDialog.setHeaderText("Вводите хотя бы одну букву:");
                     textInputDialog.setContentText("Ваша буква:");
                     res = textInputDialog.showAndWait();
@@ -158,7 +160,7 @@ public class Controller implements Initializable {
                 }
                 while (ans.length() > 1  || !thisQuestion.checkLetter(ans)) {
                     textInputDialog = new TextInputDialog();
-                    textInputDialog.setTitle("Ввод буквы");
+                    textInputDialog.setTitle("Поле чудес");
                     if (ans.length() > 1)
                         textInputDialog.setHeaderText("Вводите только одну букву:");
                     else
@@ -168,7 +170,7 @@ public class Controller implements Initializable {
                     ans = res.get();
                     while (ans.isEmpty()) {
                         textInputDialog = new TextInputDialog();
-                        textInputDialog.setTitle("Ввод буквы");
+                        textInputDialog.setTitle("Поле чудес");
                         textInputDialog.setHeaderText("Вводите хотя бы одну букву:");
                         textInputDialog.setContentText("Ваша буква:");
                         res = textInputDialog.showAndWait();
@@ -176,6 +178,11 @@ public class Controller implements Initializable {
                     }
                 }
                 if (players[thisPlayer].giveAnswer(thisQuestion, ans, thisPoint)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Поле чудес");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Есть такая буква!");
+                    alert.showAndWait();
                     int k = 0;
                     for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
                         if (thisQuestion.getGuessedText().charAt(k) != '*') {
@@ -185,9 +192,20 @@ public class Controller implements Initializable {
                         k += 1;
                     }
                     scales[thisPlayer].setText(String.valueOf(players[thisPlayer].getPoints()));
+                    winner = thisQuestion.determiningWinner(players);
+                    if (winner != null) {
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Поле чудес");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Игра окончена! Победитель: " + winner.getName() +
+                                " со счетом " + winner.getPoints());
+                        alert.showAndWait();
+                        Platform.exit();
+                        System.exit(0);
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Ответ");
+                    alert.setTitle("Поле чудес");
                     alert.setHeaderText(null);
                     alert.setContentText("Нет такой буквы!");
                     alert.showAndWait();
@@ -216,9 +234,6 @@ public class Controller implements Initializable {
         Player player1 = new Player("Михаил");
         Player player2 = new Player("Лариса");
         Player player3 = new Player("Я");
-        name1.setText(player1.getName());
-        name2.setText(player2.getName());
-        name3.setText(player3.getName());
         players = new Player[] {player1, player2, player3};
         scales = new Label[] {scale1, scale2, scale3};
         thisPlayer = 0;
@@ -235,6 +250,11 @@ public class Controller implements Initializable {
                 for (int i = 15 - num - 1; i >= (15 - num) - thisQuestion.getAnswer().length(); i--) {
                     fieldAnswer.getChildren().get(2*15 + i).setStyle("-fx-background-color: #011f47");
                 }
+            }
+            if (name1 != null && name2 != null && name3 != null) {
+                name1.setText(player1.getName());
+                name2.setText(player2.getName());
+                name3.setText(player3.getName());
             }
         }
     }

@@ -71,7 +71,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Вы">
+      <Label fx:id="name3" alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Вы">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>

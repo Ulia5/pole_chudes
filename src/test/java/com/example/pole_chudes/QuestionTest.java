@@ -147,10 +147,10 @@ class QuestionTest {
         Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
                 "ему присваивают личное имя. Во времена Второй мировой войны " +
                 "американские синоптики начали давать ураганам имена кого?", "теща");
-        player1.giveAnswer(question, "теща", 250);
-        player2.giveAnswer(question, "теща", 500);
-        player2.giveAnswer(question, "теща", 150);
-        player1.giveAnswer(question, "теща", 600);
-        assertEquals(player1, question.determingWinner(players));
+        player1.giveAnswer(question, "т", 250);
+        player2.giveAnswer(question, "е", 500);
+        player2.giveAnswer(question, "щ", 150);
+        player1.giveAnswer(question, "а", 600);
+        assertEquals(player1, question.determiningWinner(players));
     }
 }
