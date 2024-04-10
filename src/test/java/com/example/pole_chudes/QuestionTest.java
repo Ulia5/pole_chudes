@@ -137,4 +137,20 @@ class QuestionTest {
         assertTrue(question.checkLetter("а"));
         assertFalse(question.checkLetter("а"));
     }
+
+    @Test
+    @DisplayName("Определение победителя")
+    void determiningWinner() {
+        Player player1 = new Player("Михаил");
+        Player player2 = new Player("Лариса");
+        Player players[] = new Player[] {player1, player2};
+        Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
+                "ему присваивают личное имя. Во времена Второй мировой войны " +
+                "американские синоптики начали давать ураганам имена кого?", "теща");
+        player1.giveAnswer(question, "теща", 250);
+        player2.giveAnswer(question, "теща", 500);
+        player2.giveAnswer(question, "теща", 150);
+        player1.giveAnswer(question, "теща", 600);
+        assertEquals(player1, question.determingWinner(players));
+    }
 }
