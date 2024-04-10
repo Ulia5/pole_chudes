@@ -1,13 +1,18 @@
 package com.example.pole_chudes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
     private String questionText;
     private String answerText;
     private String guessedText;
+    private List<Character> usedLetters;
     public Question(String question, String answer) {
         this.questionText = question;
         this.answerText = answer;
         this.guessedText = "*".repeat(answer.length());
+        this.usedLetters = new ArrayList<>();
     }
 
     public String getQuestion() {
@@ -32,6 +37,15 @@ public class Question {
                         guessedText = guessedText.substring(0, i) + letter;
                 }
             }
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public boolean checkLetter(String letter) {
+        if (!usedLetters.contains(letter.charAt(0))) {
+            usedLetters.add(letter.charAt(0));
             return true;
         }
         else

@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -77,6 +78,12 @@ public class Controller implements Initializable {
     public Label scale2;
     @FXML
     public Label scale3;
+    @FXML
+    public Label name1;
+    @FXML
+    public Label name2;
+    @FXML
+    public Label name3;
 
     @FXML
     public void startGame(ActionEvent event) throws IOException {
@@ -149,10 +156,13 @@ public class Controller implements Initializable {
                     res = textInputDialog.showAndWait();
                     ans = res.get();
                 }
-                while (ans.length() > 1) {
+                while (ans.length() > 1  || !thisQuestion.checkLetter(ans)) {
                     textInputDialog = new TextInputDialog();
                     textInputDialog.setTitle("Ввод буквы");
-                    textInputDialog.setHeaderText("Вводите только одну букву:");
+                    if (ans.length() > 1)
+                        textInputDialog.setHeaderText("Вводите только одну букву:");
+                    else
+                        textInputDialog.setHeaderText("Такая буква уже была, введите другую букву:");
                     textInputDialog.setContentText("Ваша буква:");
                     res = textInputDialog.showAndWait();
                     ans = res.get();
@@ -176,6 +186,11 @@ public class Controller implements Initializable {
                     }
                     scales[thisPlayer].setText(String.valueOf(players[thisPlayer].getPoints()));
                 } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Ответ");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Нет такой буквы!");
+                    alert.showAndWait();
                     scales[thisPlayer].setTextFill(Color.web("rgb(1, 31, 71)"));
                     if (thisPlayer == 2)
                         thisPlayer = 0;
@@ -201,6 +216,9 @@ public class Controller implements Initializable {
         Player player1 = new Player("Михаил");
         Player player2 = new Player("Лариса");
         Player player3 = new Player("Я");
+        name1.setText(player1.getName());
+        name2.setText(player2.getName());
+        name3.setText(player3.getName());
         players = new Player[] {player1, player2, player3};
         scales = new Label[] {scale1, scale2, scale3};
         thisPlayer = 0;

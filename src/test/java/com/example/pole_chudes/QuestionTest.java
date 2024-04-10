@@ -134,7 +134,7 @@ class QuestionTest {
         Question question = new Question("Если скорость ветра тропического шторма превышает 60 км/ч, " +
                 "ему присваивают личное имя. Во времена Второй мировой войны " +
                 "американские синоптики начали давать ураганам имена кого?", "теща");
-        assertEquals(true, question.checkLetter("а"));
-        assertEquals(false, question.checkLetter("а"));
+        assertTrue(question.checkLetter("а"));
+        assertFalse(question.checkLetter("а"));
     }
 }

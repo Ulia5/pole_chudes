@@ -29,7 +29,7 @@
             <Image url="@lider.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Михаил">
+      <Label fx:id="name1" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Михаил">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>
@@ -50,7 +50,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Лариса">
+      <Label fx:id="name2" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="412.0" prefHeight="32.0" prefWidth="73.0" text="Лариса">
          <font>
             <Font name="Segoe Print" size="18.0" />
          </font>
